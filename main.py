@@ -37,6 +37,7 @@ class MainView:
 
         messagebox.showinfo(message="test")
 
+
         # self.label_commands = tk.Label(self.root, text="t", font=('Arial', 16))
         # self.label_commands.pack()
 
