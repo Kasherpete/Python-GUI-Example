@@ -15,6 +15,7 @@ class MainView:
         self.root.maxsize(500, 500)
         self.root.minsize(500, 500)
         self.root.title("App SMS Console")
+        self.stopped = False
 
         # text
 
@@ -24,6 +25,8 @@ class MainView:
         self.label_commands.pack()
 
         tk.Button(self.root, text="Refresh", font=('Arial', 14), command=self.button1_refresh).pack()
+        self.stop_button = tk.Button(self.root, text="STOP", font=('Arial', 14), command=self.button2_refresh)
+        self.stop_button.pack()
 
         # run
 
@@ -34,6 +37,15 @@ class MainView:
 
         self.update_commands_sent()
         self.root.update()
+
+
+    def button2_refresh(self):
+
+        t = messagebox.askyesnocancel(message="Are you sure you want to stop the service?")
+        if t:
+            self.stopped = True
+            self.root.title("App SMS Console - STOPPED")
+            self.stop_button.config(text="RESUME")
 
 
     def update_commands_sent(self):
