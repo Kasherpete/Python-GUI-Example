@@ -20,30 +20,23 @@ class MainView:
 
         tk.Label(self.root, text="App SMS Console", font=('Arial', 40)).pack()
 
-
         self.label_commands = tk.Label(self.root, text=f"Commands sent since start: {self.number}", font=('Arial', 16))
         self.label_commands.pack()
 
-        # button. displays message when pressed
-
-        tk.Button(self.root, text="Refresh", font=('Arial', 14), command=self.button_refresh).pack()
-
+        tk.Button(self.root, text="Refresh", font=('Arial', 14), command=self.button1_refresh).pack()
 
         # run
 
         self.root.mainloop()
 
 
-    def button_refresh(self):
+    def button1_refresh(self):
 
-        # messagebox.showinfo(message="test")
-
-        self.update()
+        self.update_commands_sent()
         self.root.update()
-        # self.label_commands = tk.Label(self.root, text="t", font=('Arial', 16))
-        # self.label_commands.pack()
 
-    def update(self):
+
+    def update_commands_sent(self):
         self.number += 1
         self.label_commands.config(text=f"Commands sent since start: {self.number}", font=('Arial', 16))
 
