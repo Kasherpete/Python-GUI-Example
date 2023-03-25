@@ -1,5 +1,14 @@
 import tkinter as tk
 from tkinter import messagebox
+import threading
+import time
+
+
+def do_stuff():
+    while True:
+        time.sleep(1)
+        print("mark")
+
 
 
 class MainView:
@@ -58,5 +67,9 @@ class MainView:
         self.number += 1
         self.label_commands.config(text=f"Commands sent since start: {self.number}", font=('Arial', 16))
 
+
+
+service_thread = threading.Thread(target=do_stuff)
+service_thread.start()
 
 MainView()
