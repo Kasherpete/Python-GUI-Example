@@ -20,6 +20,7 @@ class MainView:
         # initialization
 
         self.root = tk.Tk()
+        self.root.protocol('WM_DELETE_WINDOW', self.display_closing_message)
         self.root.geometry("500x500")
         self.root.maxsize(500, 500)
         self.root.minsize(500, 500)
@@ -36,6 +37,12 @@ class MainView:
         tk.Button(self.root, text="Refresh", font=('Arial', 14), command=self.button1_refresh).pack()
         self.stop_button = tk.Button(self.root, text="STOP", font=('Arial', 14), command=self.button2_refresh)
         self.stop_button.pack()
+
+        self.menu_bar = tk.Menu(self.root)
+        self.file_menu = tk.Menu(self.menu_bar, tearoff=0)
+        self.file_menu.add_command(label="Close")
+        self.menu_bar.add_cascade(menu=self.file_menu, label="File")
+        # self.root.config(menu=self.menu_bar)
 
         # run
 
@@ -68,8 +75,13 @@ class MainView:
         self.label_commands.config(text=f"Commands sent since start: {self.number}", font=('Arial', 16))
 
 
+    def display_closing_message(self):
+        user_response = messagebox.askyesnocancel(message="Are you sure you want to quit? Doing so will stop the service.")
+        if user_response:
+            self.root.destroy()
 
-service_thread = threading.Thread(target=do_stuff)
+
+service_thread = threading.Thread(target=do_stuff, daemon=True)
 service_thread.start()
 
 MainView()
