@@ -41,11 +41,17 @@ class MainView:
 
     def button2_refresh(self):
 
-        t = messagebox.askyesnocancel(message="Are you sure you want to stop the service?")
-        if t:
-            self.stopped = True
-            self.root.title("App SMS Console - STOPPED")
-            self.stop_button.config(text="RESUME")
+        if self.stopped:
+            self.stopped = False
+            self.root.title("App SMS Console")
+            self.stop_button.config(text="STOP")
+        else:
+
+            user_response = messagebox.askyesnocancel(message="Are you sure you want to stop the service?")
+            if user_response:
+                self.stopped = True
+                self.root.title("App SMS Console - STOPPED")
+                self.stop_button.config(text="RESUME")
 
 
     def update_commands_sent(self):
